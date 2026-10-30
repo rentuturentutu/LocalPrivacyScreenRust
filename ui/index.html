@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>本地隐私屏</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="titlebar" data-tauri-drag-region>
+    <div class="brand" data-tauri-drag-region>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span data-tauri-drag-region>本地隐私屏</span>
+    </div>
+    <div class="window-actions">
+      <button class="icon-button" id="minimizeButton" type="button" aria-label="最小化">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8" /></svg>
+      </button>
+      <button class="icon-button danger" id="closeButton" type="button" aria-label="关闭">
+        <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 3l6 6M9 3L3 9" /></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="hero card">
+      <div class="hero-text">
+        <p class="eyebrow">不能锁屏时保护本机屏幕</p>
+        <h1>一键遮挡本地显示器</h1>
+        <p class="muted">启动后所有显示器显示隐私画面，并屏蔽本机物理键盘和鼠标；自家 DuGJRemoteDesk、程序注入输入、自动化操作和截图仍可继续使用。</p>
+        <div class="hero-actions">
+          <button class="primary" id="startButton" type="button">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2l6 2.5v5c0 4-2.6 7-6 8.5-3.4-1.5-6-4.5-6-8.5v-5L10 2z" /></svg>
+            <span>启动隐私屏</span>
+          </button>
+          <span class="hint">退出：在本机键盘按 <kbd id="heroHotkey">Ctrl+Shift+P</kbd></span>
+        </div>
+      </div>
+      <div class="hero-preview" id="heroPreview" aria-hidden="true">
+        <div class="monitor"><div class="screen" id="miniScreen"></div></div>
+        <div class="monitor small"><div class="screen" id="miniScreen2"></div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div>
+          <h2>退出快捷键</h2>
+          <p class="muted">至少包含 Ctrl、Alt、Shift 或 Win 中的一个，仅响应本机物理键盘。</p>
+        </div>
+      </div>
+      <div class="hotkey-row">
+        <button class="hotkey" id="hotkeyButton" type="button" aria-describedby="hotkeyHelp">
+          <span id="hotkeyLabel">Ctrl+Shift+P</span>
+        </button>
+        <span class="muted small" id="hotkeyHelp">点击后直接按下新的组合键，Esc 取消</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <div>
+          <h2>隐私画面</h2>
+          <p class="muted">默认纯黑，也可以选择 PNG、JPEG、BMP 或 GIF 图片。</p>
+        </div>
+        <div class="button-group">
+          <button class="secondary" id="pickButton" type="button">选择图片</button>
+          <button class="ghost" id="blackButton" type="button">使用纯黑</button>
+        </div>
+      </div>
+      <div class="background-row">
+        <div class="preview" id="preview">
+          <img id="previewImage" alt="背景图片预览" hidden />
+          <span class="preview-empty" id="previewEmpty">纯黑背景</span>
+        </div>
+        <div class="background-options">
+          <p class="file-path" id="backgroundPath" title="">未选择图片</p>
+          <fieldset class="segmented" id="fitGroup">
+            <legend>铺图方式</legend>
+            <label><input type="radio" name="fit" value="cover" checked /><span>铺满并裁切</span></label>
+            <label><input type="radio" name="fit" value="contain" /><span>完整显示</span></label>
+            <label><input type="radio" name="fit" value="stretch" /><span>拉伸铺满</span></label>
+          </fieldset>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span class="status" id="statusText" role="status" aria-live="polite">设置会自动保存到当前用户注册表</span>
+      <div class="footer-actions">
+        <button class="link" id="logButton" type="button">打开运行日志</button>
+        <button class="link" id="resetButton" type="button">恢复默认设置</button>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="alert" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

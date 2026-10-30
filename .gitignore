@@ -1,0 +1,15 @@
+/target/
+/dist/
+/gen/
+/*.exe
+/*.zip
+/*.log
+/*.dmp
+/rust-manifest.xml
+/.idea/
+/.vscode/
+*.user
+*.suo
+*.pdb
+.DS_Store
+Thumbs.db
